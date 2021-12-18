@@ -13,11 +13,13 @@ let original = spendSection.clientHeight;
 // spend-section의 기본 높이 373px
 
 dragBar.addEventListener("touchmove", (e) => {
+  e.preventDefault();
   let newHeight = 680 - e.touches[0].clientY;
   spendSection.style.height = `${newHeight}px`;
 });
 
 dragBar.addEventListener("touchend", (e) => {
+  e.preventDefault();
   let endPoint = e.changedTouches[0].clientY;
   // 터치 이벤트 종료시점의 clinetY 기준으로 최소, 최대 높이를 결정
   if (endPoint < middleLine) {
