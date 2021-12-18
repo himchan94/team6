@@ -17,6 +17,7 @@ let original = spendSection.clientHeight;
 
 // dragbar event
 dragBar.addEventListener("touchmove", (e) => {
+  console.log(e);
   e.preventDefault();
   let newHeight = 680 - e.touches[0].clientY;
   spendSection.style.height = `${newHeight}px`;
@@ -43,4 +44,22 @@ dragBar.addEventListener("touchend", (e) => {
     }, 500);
     // 최소 높이
   }
+});
+
+// swiper
+
+// swiper를 account의 숫자와 거리가 필요함
+const slider = document.querySelector(".slider");
+const xCooridinates = { start: 0, move: 0, end: 0 };
+
+console.dir(slider);
+
+slider.addEventListener("touchstart", (e) => {
+  xCooridinates.start = e.touches[0].clientX;
+  // console.log(e.touches[0].clientX);
+});
+
+slider.addEventListener("touchmove", (e) => {
+  xCooridinates.move = e.touches[0].clientX;
+  slider.style.left = `${xCooridinates.start - xCooridinates.move}px`;
 });
