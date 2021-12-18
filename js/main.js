@@ -1,21 +1,26 @@
 const spendSection = document.querySelector(".spend-section");
+const dayCont = spendSection.querySelector(".day-cont");
 const dragBar = spendSection.querySelector(".spend-section > .dragbar");
-const limit = document.querySelector(".limit");
+const bar = document.querySelector(".bar");
 const accountMoney = document.querySelector(".account-money");
 
 const accountMoneyBottom = accountMoney.getBoundingClientRect().bottom;
-const limitTop = limit.getBoundingClientRect().top;
+const barTop = bar.getBoundingClientRect().top;
 
-let middleLine = (limitTop + accountMoneyBottom) / 2;
+let middleLine = (barTop + accountMoneyBottom) / 2;
 // middleLine(현재 161.5)를 기준
 
 let original = spendSection.clientHeight;
 // spend-section의 기본 높이 373px
 
+//progress event
+
+// dragbar event
 dragBar.addEventListener("touchmove", (e) => {
   e.preventDefault();
   let newHeight = 680 - e.touches[0].clientY;
   spendSection.style.height = `${newHeight}px`;
+  dayCont.style.height = "548px";
 });
 
 dragBar.addEventListener("touchend", (e) => {

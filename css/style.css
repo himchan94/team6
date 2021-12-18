@@ -136,7 +136,7 @@ header > .btn-cont > .btn-search > img {
 
 .account-section > .account-cont > .progress-cont > .bar > .progress {
   position: relative;
-  width: 202px;
+  width: 50px;
   height: 6px;
   background: #ffdb4c;
   border-radius: 3px;
@@ -200,7 +200,7 @@ header > .btn-cont > .btn-search > img {
   box-shadow: 0px -5px 14px rgba(189, 144, 28, 0.08);
   border-radius: 30px 30px 0px 0px;
   overflow: hidden;
-  transition: height 0.5ms ease;
+  transition: height 0.1s;
 }
 
 .spend-section > .dragbar {
@@ -254,6 +254,7 @@ header > .btn-cont > .btn-search > img {
   height: 100%;
   border-radius: 6px;
   background-color: #feb700;
+  transition: width 0.5s;
 }
 
 .spend-section > .save-cont > .save-list > .save-bar > .save-progress {
