@@ -127,23 +127,28 @@ header > .btn-cont > .btn-search > img {
 }
 
 .account-section > .account-cont > .progress-cont > .bar {
-  position: relative;
+  /* position: relative; */
   width: 202px;
   height: 6px;
   background: #c4c4c4;
+  border-radius: 3px;
+}
+
+.account-section > .account-cont > .progress-cont > .bar > .progress {
+  position: relative;
+  width: 202px;
+  height: 6px;
+  background: #ffdb4c;
   border-radius: 3px;
   display: flex;
   align-items: center;
 }
 
-.account-section > .account-cont > .progress-cont > .bar > .progress {
-  width: 202px;
-  height: 6px;
-  background: #ffdb4c;
-  border-radius: 3px;
-}
-
-.account-section > .account-cont > .progress-cont > .bar > .limit {
+.account-section > .account-cont > .progress-cont > .bar > .progress::after {
+  display: block;
+  right: 0;
+  position: absolute;
+  content: "";
   width: 4px;
   height: 17px;
   background: #ff5f00;
@@ -287,7 +292,8 @@ header > .btn-cont > .btn-search > img {
 
 .spend-section > .day-cont {
   width: 302px;
-  height: 548px;
+  height: 331px;
+  /* height: 548px; */
   overflow-y: auto;
   margin: auto;
   margin-top: 16px;
