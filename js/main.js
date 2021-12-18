@@ -29,9 +29,18 @@ dragBar.addEventListener("touchend", (e) => {
   // 터치 이벤트 종료시점의 clinetY 기준으로 최소, 최대 높이를 결정
   if (endPoint < middleLine) {
     spendSection.style.height = "637px";
+    spendSection.style.transition = "height 0.5s";
+    setTimeout(() => {
+      spendSection.style.transition = "";
+    }, 500);
+
     // 최대 높이
   } else {
     spendSection.style.height = "387px";
+    spendSection.style.transition = "height 0.5s";
+    setTimeout(() => {
+      spendSection.style.transition = "";
+    }, 500);
     // 최소 높이
   }
 });
