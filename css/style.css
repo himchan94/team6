@@ -1,5 +1,4 @@
 body {
-  padding: 10% 25%;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
   line-height: 21px;
@@ -128,23 +127,28 @@ header > .btn-cont > .btn-search > img {
 }
 
 .account-section > .account-cont > .progress-cont > .bar {
-  position: relative;
+  /* position: relative; */
   width: 202px;
   height: 6px;
   background: #c4c4c4;
+  border-radius: 3px;
+}
+
+.account-section > .account-cont > .progress-cont > .bar > .progress {
+  position: relative;
+  width: 50px;
+  height: 6px;
+  background: #ffdb4c;
   border-radius: 3px;
   display: flex;
   align-items: center;
 }
 
-.account-section > .account-cont > .progress-cont > .bar > .progress {
-  width: 202px;
-  height: 6px;
-  background: #ffdb4c;
-  border-radius: 3px;
-}
-
-.account-section > .account-cont > .progress-cont > .bar > .limit {
+.account-section > .account-cont > .progress-cont > .bar > .progress::after {
+  display: block;
+  right: 0;
+  position: absolute;
+  content: "";
   width: 4px;
   height: 17px;
   background: #ff5f00;
@@ -190,13 +194,22 @@ header > .btn-cont > .btn-search > img {
   bottom: 0;
   width: 375px;
   max-height: 637px;
+  min-height: 387px;
   height: 383px;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
   box-shadow: 0px -5px 14px rgba(189, 144, 28, 0.08);
   border-radius: 30px 30px 0px 0px;
+  overflow: hidden;
+  transition: height 0.1s;
 }
 
 .spend-section > .dragbar {
+  width: 100%;
+}
+
+.spend-section > .dragbar::after {
+  content: " ";
+  display: inline-block;
   width: 48px;
   height: 2.15px;
   background-color: #c4c4c4;
@@ -210,6 +223,8 @@ header > .btn-cont > .btn-search > img {
   margin: 0px 34px;
   width: 308px;
   overflow-x: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .spend-section > .save-cont::-webkit-scrollbar {
@@ -239,6 +254,7 @@ header > .btn-cont > .btn-search > img {
   height: 100%;
   border-radius: 6px;
   background-color: #feb700;
+  transition: width 0.5s;
 }
 
 .spend-section > .save-cont > .save-list > .save-bar > .save-progress {
@@ -277,14 +293,20 @@ header > .btn-cont > .btn-search > img {
 
 .spend-section > .day-cont {
   width: 302px;
-  height: 296px;
+  height: 331px;
+  /* height: 548px; */
   overflow-y: auto;
   margin: auto;
-  border: 1px solid black;
+  margin-top: 16px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.spend-section > .day-cont > .day-list {
-  border: 1px solid black;
+.spend-section > .day-cont::-webkit-scrollbar {
+  display: none;
+}
+
+.spend-section > .day-cont > .day-list + .day-list {
   margin-top: 16px;
 }
 
@@ -304,6 +326,10 @@ header > .btn-cont > .btn-search > img {
 
 .spend-section > .day-cont > .day-list > .spend-cont {
   width: 100%;
+}
+
+.spend-section > .day-cont > .day-list > .spend-cont > .spend-list:first-child {
+  margin-top: 29px;
 }
 
 .spend-section > .day-cont > .day-list + .day-list {
