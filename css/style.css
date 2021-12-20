@@ -342,14 +342,13 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section > .day-cont > .day-list + .day-list {
-  margin-top: 38px;
+  margin-bottom: 38px;
 }
 
 .spend-section > .day-cont > .day-list > .spend-cont .spend-list {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #dcdcdc;
-  clear: both;
   margin-top: 6px;
   padding-bottom: 7px;
   font-weight: 300;
