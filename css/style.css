@@ -7,14 +7,12 @@ body {
 
 .wrapper {
   max-width: 375px;
-  border: 1px solid black;
   overflow: hidden;
 }
 
 .slider {
   position: relative;
   display: flex;
-  left: -375px;
 }
 
 .slider > .account {
@@ -144,9 +142,8 @@ header > .btn-cont > .btn-search > img {
 
 .account-section > .account-cont > .progress-cont > .bar > .progress {
   position: relative;
-  width: 50px;
   height: 6px;
-  background: #ffdb4c;
+  /* background: #ffdb4c; */
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -211,10 +208,14 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section > .dragbar {
-  width: 100%;
+  width: 48px;
+  height: 2.15px;
+  background-color: #c4c4c4;
+  border-radius: 4px;
+  margin: 4.3px 165px 16.55px 162px;
 }
 
-.spend-section > .dragbar::after {
+/* .spend-section > .dragbar::after {
   content: " ";
   display: inline-block;
   width: 48px;
@@ -222,7 +223,7 @@ header > .btn-cont > .btn-search > img {
   background-color: #c4c4c4;
   border-radius: 4px;
   margin: 4.3px 165px 16.55px 162px;
-}
+} */
 
 .spend-section > .save-cont {
   font-size: 12px;
@@ -232,6 +233,7 @@ header > .btn-cont > .btn-search > img {
   overflow-x: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  white-space: nowrap;
 }
 
 .spend-section > .save-cont::-webkit-scrollbar {
@@ -278,7 +280,7 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section > .save-cont > .save-add {
-  display: inline-block;
+  display: flex;
   margin-left: 19px;
 }
 
