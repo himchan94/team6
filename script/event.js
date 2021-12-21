@@ -52,14 +52,14 @@ dragBar.addEventListener("touchend", (e) => {
 const slider = document.querySelector(".slider");
 const xCooridinates = { start: 0, move: 0, end: 0 };
 
-console.dir(slider);
-
 slider.addEventListener("touchstart", (e) => {
+  // e.preventDefault();
   xCooridinates.start = e.touches[0].clientX;
   // console.log(e.touches[0].clientX);
 });
 
 slider.addEventListener("touchmove", (e) => {
+  // e.preventDefault();
   xCooridinates.move = e.touches[0].clientX;
   slider.style.left = `${xCooridinates.start - xCooridinates.move}px`;
 });
