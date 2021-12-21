@@ -7,15 +7,22 @@ body {
 
 .wrapper {
   max-width: 375px;
-  overflow: hidden;
+  overflow-y: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-.slider {
+.wrapper::-webkit-scrollbar {
+  display: none;
+  height: 0;
+}
+
+.swiper {
   position: relative;
   display: flex;
+  left: 0;
 }
 
-.slider > .account {
+.swiper > .account {
   float: left;
   position: relative;
   width: 375px;
@@ -215,16 +222,6 @@ header > .btn-cont > .btn-search > img {
   margin: 4.3px 165px 16.55px 162px;
 }
 
-/* .spend-section > .dragbar::after {
-  content: " ";
-  display: inline-block;
-  width: 48px;
-  height: 2.15px;
-  background-color: #c4c4c4;
-  border-radius: 4px;
-  margin: 4.3px 165px 16.55px 162px;
-} */
-
 .spend-section > .save-cont {
   font-size: 12px;
   line-height: 18px;
@@ -342,6 +339,10 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section > .day-cont > .day-list + .day-list {
+  margin-top: 38px;
+}
+
+.spend-section > .day-cont > .day-list:last-child {
   margin-bottom: 38px;
 }
 

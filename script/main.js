@@ -3,7 +3,17 @@ import accountSection from "../component/accountSection.js";
 import spendSection from "../component/spendSection.js";
 import footer from "../component/footer.js";
 
-const slider = document.querySelector(".slider");
+const _wrapper = document.createElement("div");
+_wrapper.classList.add("wrapper");
+
+const _swiper = document.createElement("div");
+_swiper.classList.add("swiper");
+
+_wrapper.appendChild(_swiper);
+
+document.body.appendChild(_wrapper);
+
+const swiper = document.querySelector(".swiper");
 
 const todayYMD = new Date();
 const today = todayYMD.getDate();
@@ -17,7 +27,7 @@ accountArray.forEach((accountInfo) => {
   createAccount(accountInfo);
 });
 
-// Account를 생성하는 함수
+// Creating Account div function
 function createAccount(data) {
   const {
     accountName,
@@ -52,15 +62,13 @@ function createAccount(data) {
   accountDiv.insertAdjacentHTML("beforeend", accountSectionComponent);
 
   // Creating spendSection
-
-  const spendSectionComponent = spendSection();
-
+  const spendSectionComponent = spendSection(saveList, bankList);
   accountDiv.appendChild(spendSectionComponent);
 
-  slider.append(accountDiv);
+  // Append accountDiv
+  swiper.append(accountDiv);
 
   // Adding dragbar event
-
   const currentAccount = document.getElementById(`${accountName}`);
   const _spendSection = currentAccount.querySelector(".spend-section");
   const _dragbar = _spendSection.querySelector(".dragbar");
@@ -74,17 +82,21 @@ function createAccount(data) {
   const middleLine = (barTop + accountMoneyBottom) / 2;
 
   _dragbar.addEventListener("touchmove", (e) => {
-    console.log(e);
-    e.preventDefault();
+    if (e.cancelable) {
+      e.preventDefault();
+    }
     let newHeight = 680 - e.touches[0].clientY;
     _spendSection.style.height = `${newHeight}px`;
-    // dayCont.style.height = "548px";
+    _dayCont.style.height = "548px";
   });
 
   _dragbar.addEventListener("touchend", (e) => {
     e.preventDefault();
-    let endPoint = e.changedTouches[0].clientY;
+
     // 터치 이벤트 종료시점의 clinetY 기준으로 최소, 최대 높이를 결정
+    let endPoint = e.changedTouches[0].clientY;
+
+    // 최대 높이
     if (endPoint < middleLine) {
       _spendSection.style.height = "637px";
       _spendSection.style.transition = "height 0.5s";
@@ -92,130 +104,58 @@ function createAccount(data) {
         _spendSection.style.transition = "";
       }, 500);
 
-      // 최대 높이
+      // 최소 높이
     } else {
       _spendSection.style.height = "387px";
       _spendSection.style.transition = "height 0.5s";
       setTimeout(() => {
         _spendSection.style.transition = "";
       }, 500);
-      // 최소 높이
+      _dayCont.style.height = "331px";
     }
   });
-
-  console.log(_dragbar);
-
-  // 돔 완성 후 여기서 이벤트 추가해야함 id를
-  // const sp = document.querySelector(".spend-section");
-  // console.log(sp);
 }
 
 // footer 생성
 const footerComponent = footer();
 document.body.insertAdjacentHTML("beforeend", footerComponent);
 
-// const manage = document.querySelectorAll(".btn-manage");
-// manage.forEach((i) =>
-//   i.addEventListener("click", () => {
-//     console.log("hi");
-//   })
-// );
+const wrapper = document.querySelector(".wrapper");
+let currentpage = 0;
+const lastPage = accountArray.length;
+let scrollPosition = 0;
+wrapper.addEventListener("scroll", (e) => {
+  e.preventDefault();
+  console.log(wrapper.scrollLeft);
 
-//  <div class="dragbar"></div>
+  swiper.style.left = `${-wrapper.scrollLeft}px`;
 
-//     <div class="save-cont">
-//       <ul class="save-list">
-//         <li class="save-bar">
-//           <div class="save-progress">
-//             <span class="save-name">여행가자</span>
-//             <span class="save-money">142,200원 </span>
-//           </div>
-//         </li>
-//       </ul>
+  if (wrapper.scrollLeft > 187) {
+    swiper.style.transition = "0.5s";
+    swiper.style.left = "-187px";
+    console.log(wrapper.scrollLeft);
+  }
 
-//       <div class="save-add">
-//         <button class="btn btn-add">
-//           <img src="./images/add.svg" alt="" />
-//           <span> 저금통 만들기</span>
-//         </button>
-//       </div>
-//     </div>
+  swiper.style.transition = "";
+});
 
-//     <ul class="day-cont">
-//       <li class="day-list">
-//         <strong class="day">오늘</strong>
-//         <span class="total">12000원 지출</span>
+// // Adding swiper event
+// const xCooridinates = { start: 0, move: 0, end: 0 };
+// const dragbar = document.querySelector(".dragbar");
 
-//         <ul class="spend-cont">
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list deposit">
-//             <span class="spend-title">김길수</span>
-//             <span class="spend-cost">+ 20,000</span>
-//           </li>
-//         </ul>
-//       </li>
+// swiper.addEventListener("touchstart", (e) => {
+//   if (e.target !== dragbar) {
+//     // e.preventDefault();
+//     xCooridinates.start = e.touches[0].clientX;
+//     // console.log(e.touches[0].clientX);
+//   }
+// });
 
-//       <li class="day-list">
-//         <strong class="day">오늘</strong>
-//         <span class="total">12000원 지출</span>
-
-//         <ul class="spend-cont">
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list deposit">
-//             <span class="spend-title">김길수</span>
-//             <span class="spend-cost">+ 20,000</span>
-//           </li>
-//         </ul>
-//       </li>
-
-//       <li class="day-list">
-//         <strong class="day">오늘</strong>
-//         <span class="total">12000원 지출</span>
-
-//         <ul class="spend-cont">
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list deposit">
-//             <span class="spend-title">김길수</span>
-//             <span class="spend-cost">+ 20,000</span>
-//           </li>
-//         </ul>
-//       </li>
-
-//       <li class="day-list">
-//         <strong class="day">오늘</strong>
-//         <span class="total">12000원 지출</span>
-
-//         <ul class="spend-cont">
-//           <li class="spend-list">
-//             <span class="spend-title">미스터피자</span>
-//             <span class="spend-cost">32,000</span>
-//           </li>
-//           <li class="spend-list deposit">
-//             <span class="spend-title">김길수</span>
-//             <span class="spend-cost">+ 20,000</span>
-//           </li>
-//         </ul>
-//       </li>
-//     </ul>
-//   </section>`;
+// swiper.addEventListener("touchmove", (e) => {
+//   if (e.target !== dragbar) {
+//     // e.preventDefault();
+//     xCooridinates.move = e.touches[0].clientX;
+//     swiper.style.left = `${xCooridinates.move - xCooridinates.start}px`;
+//     xCooridinates.start = 375;
+//   }
+// });
