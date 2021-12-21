@@ -1,5 +1,3 @@
-let accountArray = [];
-
 const myAccountUrl =
   "https://gist.githubusercontent.com/himchan94/a539fd8c884477a314044e8b423b9653/raw/4703f3ad54d707c1baec154783d3f1f382671d5a/myAccount.json";
 const gmAccountUrl =

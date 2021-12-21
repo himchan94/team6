@@ -120,42 +120,27 @@ function createAccount(data) {
 const footerComponent = footer();
 document.body.insertAdjacentHTML("beforeend", footerComponent);
 
-const wrapper = document.querySelector(".wrapper");
-let currentpage = 0;
-const lastPage = accountArray.length;
-let scrollPosition = 0;
-wrapper.addEventListener("scroll", (e) => {
-  e.preventDefault();
-  console.log(wrapper.scrollLeft);
+// Adding swiper event
+const xCooridinates = { start: 0, move: 0, end: 0 };
+const dragbar = document.querySelector(".dragbar");
 
-  swiper.style.left = `${-wrapper.scrollLeft}px`;
-
-  if (wrapper.scrollLeft > 187) {
-    swiper.style.transition = "0.5s";
-    swiper.style.left = "-187px";
-    console.log(wrapper.scrollLeft);
+swiper.addEventListener("touchstart", (e) => {
+  if (!scrollStatus) {
+    if (e.target !== dragbar) {
+      // e.preventDefault();
+      xCooridinates.start = e.touches[0].clientX;
+      // console.log(e.touches[0].clientX);
+    }
   }
-
-  swiper.style.transition = "";
 });
 
-// // Adding swiper event
-// const xCooridinates = { start: 0, move: 0, end: 0 };
-// const dragbar = document.querySelector(".dragbar");
-
-// swiper.addEventListener("touchstart", (e) => {
-//   if (e.target !== dragbar) {
-//     // e.preventDefault();
-//     xCooridinates.start = e.touches[0].clientX;
-//     // console.log(e.touches[0].clientX);
-//   }
-// });
-
-// swiper.addEventListener("touchmove", (e) => {
-//   if (e.target !== dragbar) {
-//     // e.preventDefault();
-//     xCooridinates.move = e.touches[0].clientX;
-//     swiper.style.left = `${xCooridinates.move - xCooridinates.start}px`;
-//     xCooridinates.start = 375;
-//   }
-// });
+swiper.addEventListener("touchmove", (e) => {
+  if (!scrollStatus) {
+    if (e.target !== dragbar) {
+      // e.preventDefault();
+      xCooridinates.move = e.touches[0].clientX;
+      swiper.style.left = `-${xCooridinates.start - xCooridinates.move}px`;
+      console.log(xCooridinates);
+    }
+  }
+});

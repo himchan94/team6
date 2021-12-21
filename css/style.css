@@ -7,13 +7,7 @@ body {
 
 .wrapper {
   max-width: 375px;
-  overflow-y: hidden;
-  -ms-overflow-style: none; /* IE and Edge */
-}
-
-.wrapper::-webkit-scrollbar {
-  display: none;
-  height: 0;
+  overflow: hidden;
 }
 
 .swiper {

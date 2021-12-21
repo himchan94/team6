@@ -5,6 +5,20 @@ const dayCont = (spendList) => {
   const _dayCont = document.createElement("ul");
   _dayCont.classList.add("day-cont");
 
+  _dayCont.addEventListener("scroll", (e) => {
+    scrollStatus = true;
+    dayContStatus = false;
+  });
+
+  _dayCont.addEventListener("touchmove", () => {
+    dayContStatus = true;
+  });
+
+  _dayCont.addEventListener("touchend", () => {
+    scrollStatus = false;
+    dayContStatus = false;
+  });
+
   spendList.forEach((list) => {
     const _dayList = dayList(list);
     _dayCont.appendChild(_dayList);
@@ -14,9 +28,3 @@ const dayCont = (spendList) => {
 };
 
 export default dayCont;
-
-// spendList format
-// [[
-// { date: '2021-12-30', income: 'out', classify: 'mart', history: '이마트', price: 99999; }
-// { date: '2021-12-30', income: 'out', classify: 'shopping', history: '교보문고', price: 25000; }
-// ]]
