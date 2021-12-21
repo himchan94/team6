@@ -26,9 +26,8 @@ const spendSection = (saveList, bankList) => {
 
   // reorder group desc
   const group_desc = Object.values(groups).sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b[0].date).getTime() - new Date(a[0].date).getTime()
   );
-
   // Adding dayCont
   const _dayCont = dayCont(group_desc);
   _spendSection.appendChild(_dayCont);
