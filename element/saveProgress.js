@@ -1,7 +1,8 @@
-const saveProgress = (name, money, color) => {
+const saveProgress = (name, money, color, target) => {
   const saveProgress = document.createElement("div");
   saveProgress.classList.add("save-progress");
   saveProgress.style.backgroundColor = color;
+  saveProgress.style.width = `${(money / target) * 100}px`;
 
   const spanName = document.createElement("span");
   const spanMoney = document.createElement("span");

@@ -5,8 +5,8 @@ const saveList = (saveArr) => {
   saveList.classList.add("save-list");
 
   saveArr.forEach((info) => {
-    const { name, money, color } = info;
-    const newSaveProgress = saveProgress(name, money, color);
+    const { name, money, color, target } = info;
+    const newSaveProgress = saveProgress(name, money, color, target);
 
     const saveBar = document.createElement("li");
     saveBar.classList.add("save-bar");

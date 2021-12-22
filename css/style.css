@@ -250,18 +250,35 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section > .save-cont > .save-list > .save-bar > .save-progress {
+  position: relative;
   width: 100px;
   height: 100%;
   border-radius: 6px;
   background-color: #feb700;
-  transition: width 0.5s;
+  display: flex;
+  flex-direction: column;
 }
 
-.spend-section > .save-cont > .save-list > .save-bar > .save-progress {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.spend-section
+  > .save-cont
+  > .save-list
+  > .save-bar
+  > .save-progress
+  > span:first-child {
+  position: absolute;
+  top: 5px;
+  left: 13px;
+}
+
+.spend-section
+  > .save-cont
+  > .save-list
+  > .save-bar
+  > .save-progress
+  > span:last-child {
+  position: absolute;
+  top: 22px;
+  left: 13px;
 }
 
 .spend-section > .save-cont > .save-list > .save-bar > .save-progress * {
