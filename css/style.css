@@ -216,32 +216,29 @@ header > .btn-cont > .btn-search > img {
   margin: 4.3px 165px 16.55px 162px;
 }
 
-.spend-section > .save-cont {
+.spend-section > .save-outer {
   font-size: 12px;
   line-height: 18px;
   margin: 0px 34px;
   width: 308px;
-  overflow-x: auto;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  overflow: hidden;
+}
+
+.spend-section > .save-outer > .save-cont {
   white-space: nowrap;
 }
 
-.spend-section > .save-cont::-webkit-scrollbar {
-  display: none;
-}
-
-.spend-section > .save-cont {
+.spend-section > .save-outer > .save-cont {
   display: flex;
   align-items: center;
 }
 
-.spend-section > .save-cont > .save-list {
+.spend-section > .save-outer > .save-cont > .save-list {
   height: 47px;
   white-space: nowrap;
 }
 
-.spend-section > .save-cont > .save-list > .save-bar {
+.spend-section > .save-outer > .save-cont > .save-list > .save-bar {
   display: inline-block;
   width: 162px;
   height: 47px;
@@ -249,7 +246,12 @@ header > .btn-cont > .btn-search > img {
   background-color: #dadada;
 }
 
-.spend-section > .save-cont > .save-list > .save-bar > .save-progress {
+.spend-section
+  > .save-outer
+  > .save-cont
+  > .save-list
+  > .save-bar
+  > .save-progress {
   position: relative;
   width: 100px;
   height: 100%;
@@ -260,6 +262,7 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section
+  > .save-outer
   > .save-cont
   > .save-list
   > .save-bar
@@ -271,6 +274,7 @@ header > .btn-cont > .btn-search > img {
 }
 
 .spend-section
+  > .save-outer
   > .save-cont
   > .save-list
   > .save-bar
@@ -281,30 +285,36 @@ header > .btn-cont > .btn-search > img {
   left: 13px;
 }
 
-.spend-section > .save-cont > .save-list > .save-bar > .save-progress * {
+.spend-section
+  > .save-outer
+  > .save-cont
+  > .save-list
+  > .save-bar
+  > .save-progress
+  * {
   color: #fff;
   font-size: 12px;
   line-height: 18px;
 }
 
-.spend-section > .save-cont > .save-add {
+.spend-section > .save-outer > .save-cont > .save-add {
   display: flex;
   margin-left: 19px;
 }
 
-.spend-section > .save-cont > .save-add > .btn-add {
+.spend-section > .save-outer > .save-cont > .save-add > .btn-add {
   display: flex;
   align-items: center;
 }
 
-.spend-section > .save-cont > .save-add > .btn-add > span {
+.spend-section > .save-outer > .save-cont > .save-add > .btn-add > span {
   color: #ff5f00;
   margin-left: 6px;
   font-size: 12px;
   line-height: 18px;
 }
 
-.spend-section > .save-cont > .save-list > .save-bar + .save-bar {
+.spend-section > .save-outer > .save-cont > .save-list > .save-bar + .save-bar {
   margin-left: 13px;
 }
 

@@ -2,6 +2,9 @@ import saveList from "../element/saveList.js";
 import saveAdd from "../element/saveAdd.js";
 
 const saveCont = (saveArr) => {
+  const _saveOuter = document.createElement("div");
+  _saveOuter.classList.add("save-outer");
+
   const _saveCont = document.createElement("div");
   _saveCont.classList.add("save-cont");
 
@@ -13,7 +16,9 @@ const saveCont = (saveArr) => {
   const _saveAdd = saveAdd();
   _saveCont.appendChild(_saveAdd);
 
-  return _saveCont;
+  _saveOuter.appendChild(_saveCont);
+
+  return _saveOuter;
 };
 
 export default saveCont;

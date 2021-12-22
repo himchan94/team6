@@ -114,33 +114,74 @@ function createAccount(data) {
       _dayCont.style.height = "331px";
     }
   });
+
+  // Adding save-cont event
+  const _saveOuter = document.querySelector(".save-outer");
+  const _saveCont = document.querySelector(".save-cont");
+  const saveXCoord = { start: 0, offset: 0, cur: 0 };
+  const screenWidth = _saveOuter.clientWidth;
+
+  _saveOuter.addEventListener("touchstart", (e) => {
+    saveXCoord.start = e.touches[0].pageX;
+  });
+
+  _saveOuter.addEventListener("touchmove", (e) => {
+    saveXCoord.offset =
+      saveXCoord.cur + (e.targetTouches[0].pageX - saveXCoord.start);
+    _saveCont.style.transform = `translate3d(${saveXCoord.offset}px, 0px, 0px)`;
+    _saveCont.style.transitionDuration = "5ms";
+  });
+
+  _saveOuter.addEventListener("touchend", (e) => {
+    const sum = saveXCoord.cur + (e.changedTouches[0].pageX - saveXCoord.start);
+    let destination = Math.round(sum / screenWidth) * screenWidth;
+
+    if (destination > 0) {
+      destination = 0;
+    } else if (destination < -(screenWidth * 0.5)) {
+      destination = -screenWidth;
+    }
+
+    _saveCont.style.transform = `translate3d(${destination}px, 0px, 0px)`;
+    _saveCont.style.transitionDuration = "300ms";
+    saveXCoord.cur = destination;
+
+    setTimeout(() => {
+      _saveCont.style.transitionDuration = "0ms";
+    }, 300);
+  });
 }
 
 // footer 생성
 const footerComponent = footer();
 document.body.insertAdjacentHTML("beforeend", footerComponent);
 
-// Adding swiper event
-const xCooridinates = { start: 0, move: 0, end: 0 };
-const dragbar = document.querySelector(".dragbar");
+// // Adding swiper event
+// const xCooridinates = { start: 0, move: 0, end: 0 };
+// const dragbar = document.querySelector(".dragbar");
 
-swiper.addEventListener("touchstart", (e) => {
-  if (!scrollStatus) {
-    if (e.target !== dragbar) {
-      // e.preventDefault();
-      xCooridinates.start = e.touches[0].clientX;
-      // console.log(e.touches[0].clientX);
-    }
-  }
-});
+// swiper.addEventListener("touchstart", (e) => {
+//   if (!scrollStatus) {
+//     if (e.target !== dragbar) {
+//       // e.preventDefault();
+//       xCooridinates.start = e.touches[0].clientX;
+//       // console.log(e.touches[0].clientX);
+//     }
+//   }
+// });
 
-swiper.addEventListener("touchmove", (e) => {
-  if (!scrollStatus) {
-    if (e.target !== dragbar) {
-      // e.preventDefault();
-      xCooridinates.move = e.touches[0].clientX;
-      swiper.style.left = `-${xCooridinates.start - xCooridinates.move}px`;
-      console.log(xCooridinates);
-    }
-  }
-});
+// swiper.addEventListener("touchmove", (e) => {
+//   if (!scrollStatus) {
+//     if (e.target !== dragbar) {
+//       // e.preventDefault();
+
+//       if (xCooridinates.start < e.touches[0].clientX) {
+//       }
+//       {
+//         xCooridinates.move = e.touches[0].clientX;
+//         swiper.style.left = `-${xCooridinates.start - xCooridinates.move}px`;
+//         console.log(xCooridinates);
+//       }
+//     }
+//   }
+// });
