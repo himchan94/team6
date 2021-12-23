@@ -10,10 +10,13 @@ body {
   overflow: hidden;
 }
 
+/* .wrapper::-webkit-scrollbar {
+  display: none;
+} */
+
 .swiper {
   position: relative;
   display: flex;
-  left: 0;
 }
 
 .swiper > .account {

@@ -10,18 +10,9 @@ const _swiper = document.createElement("div");
 _swiper.classList.add("swiper");
 
 _wrapper.appendChild(_swiper);
-
 document.body.appendChild(_wrapper);
 
 const swiper = document.querySelector(".swiper");
-
-const todayYMD = new Date();
-const today = todayYMD.getDate();
-const lastDayOfMonth = new Date(
-  todayYMD.getFullYear(),
-  todayYMD.getMonth() + 1,
-  0
-).getDate();
 
 accountArray.forEach((accountInfo) => {
   createAccount(accountInfo);
@@ -55,9 +46,7 @@ function createAccount(data) {
     accountMoney,
     limit,
     totalSpend,
-    progressColor,
-    today,
-    lastDayOfMonth
+    progressColor
   );
   accountDiv.insertAdjacentHTML("beforeend", accountSectionComponent);
 
@@ -82,16 +71,14 @@ function createAccount(data) {
   const middleLine = (barTop + accountMoneyBottom) / 2;
 
   _dragbar.addEventListener("touchmove", (e) => {
-    if (e.cancelable) {
-      e.preventDefault();
-    }
+    e.stopPropagation();
     let newHeight = 680 - e.touches[0].clientY;
     _spendSection.style.height = `${newHeight}px`;
     _dayCont.style.height = "548px";
   });
 
   _dragbar.addEventListener("touchend", (e) => {
-    e.preventDefault();
+    e.stopPropagation();
 
     // 터치 이벤트 종료시점의 clinetY 기준으로 최소, 최대 높이를 결정
     let endPoint = e.changedTouches[0].clientY;
@@ -116,16 +103,20 @@ function createAccount(data) {
   });
 
   // Adding save-cont event
-  const _saveOuter = document.querySelector(".save-outer");
-  const _saveCont = document.querySelector(".save-cont");
+  const _saveOuter = currentAccount.querySelector(".save-outer");
+  const _saveCont = currentAccount.querySelector(".save-cont");
   const saveXCoord = { start: 0, offset: 0, cur: 0 };
   const screenWidth = _saveOuter.clientWidth;
 
   _saveOuter.addEventListener("touchstart", (e) => {
+    e.stopPropagation();
+    saveContStatus = true;
     saveXCoord.start = e.touches[0].pageX;
   });
 
   _saveOuter.addEventListener("touchmove", (e) => {
+    e.stopPropagation();
+    saveContStatus = true;
     saveXCoord.offset =
       saveXCoord.cur + (e.targetTouches[0].pageX - saveXCoord.start);
     _saveCont.style.transform = `translate3d(${saveXCoord.offset}px, 0px, 0px)`;
@@ -133,6 +124,8 @@ function createAccount(data) {
   });
 
   _saveOuter.addEventListener("touchend", (e) => {
+    e.stopPropagation();
+    saveContStatus = false;
     const sum = saveXCoord.cur + (e.changedTouches[0].pageX - saveXCoord.start);
     let destination = Math.round(sum / screenWidth) * screenWidth;
 
@@ -157,31 +150,50 @@ const footerComponent = footer();
 document.body.insertAdjacentHTML("beforeend", footerComponent);
 
 // // Adding swiper event
-// const xCooridinates = { start: 0, move: 0, end: 0 };
-// const dragbar = document.querySelector(".dragbar");
+const wrapper = document.querySelector(".wrapper");
+const account = document.querySelector(".account");
+const swiperXCoord = { start: 0, offset: 0, cur: 0 };
+const accountWidth = account.clientWidth;
+const swiperWidth = swiper.clientWidth;
 
-// swiper.addEventListener("touchstart", (e) => {
-//   if (!scrollStatus) {
-//     if (e.target !== dragbar) {
-//       // e.preventDefault();
-//       xCooridinates.start = e.touches[0].clientX;
-//       // console.log(e.touches[0].clientX);
-//     }
-//   }
-// });
+wrapper.addEventListener("touchstart", (e) => {
+  e.stopPropagation();
 
-// swiper.addEventListener("touchmove", (e) => {
-//   if (!scrollStatus) {
-//     if (e.target !== dragbar) {
-//       // e.preventDefault();
+  swiperXCoord.start = e.touches[0].pageX;
+});
 
-//       if (xCooridinates.start < e.touches[0].clientX) {
-//       }
-//       {
-//         xCooridinates.move = e.touches[0].clientX;
-//         swiper.style.left = `-${xCooridinates.start - xCooridinates.move}px`;
-//         console.log(xCooridinates);
-//       }
-//     }
-//   }
-// });
+wrapper.addEventListener("touchmove", (e) => {
+  e.stopPropagation();
+  swiperXCoord.offset =
+    swiperXCoord.cur + (e.targetTouches[0].pageX - swiperXCoord.start);
+
+  if (swiperXCoord.offset > 0) {
+    swiperXCoord.cur = 0;
+    swiperXCoord.offset = 0;
+    swiper.style.transform = `translate3d(${swiperXCoord.cur}px, 0px, 0px)`;
+  } else if (swiperXCoord.offset < -375) {
+    swiperXCoord.cur = -accountWidth;
+    swiperXCoord.offset = 0;
+    swiper.style.transform = `translate3d(${swiperXCoord.cur}px, 0px, 0px)`;
+  } else {
+    swiper.style.transform = `translate3d(${swiperXCoord.offset}px, 0px, 0px)`;
+  }
+});
+
+wrapper.addEventListener("touchend", (e) => {
+  e.stopPropagation();
+  const sum =
+    swiperXCoord.cur + (e.changedTouches[0].pageX - swiperXCoord.start);
+  let destination = Math.round(sum / swiperWidth) * swiperWidth;
+  if (destination > 0) {
+    destination = 0;
+  } else if (destination < -(swiperWidth * 0.5)) {
+    destination = -swiperWidth;
+  }
+  swiper.style.transform = `translate3d(${destination}px, 0px, 0px)`;
+  swiper.style.transitionDuration = "300ms";
+  swiperXCoord.cur = destination;
+  setTimeout(() => {
+    swiper.style.transitionDuration = "0ms";
+  }, 300);
+});

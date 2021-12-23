@@ -1,7 +1,7 @@
 const myAccountUrl =
-  "https://gist.githubusercontent.com/himchan94/a539fd8c884477a314044e8b423b9653/raw/4703f3ad54d707c1baec154783d3f1f382671d5a/myAccount.json";
+  " https://gist.githubusercontent.com/himchan94/a539fd8c884477a314044e8b423b9653/raw/045a98969d43f50cacd168835d4b83b985658478/myAccount.json";
 const gmAccountUrl =
-  "https://gist.githubusercontent.com/himchan94/283d5837431bec8d5cb88a6e3525c35f/raw/c498bf3113a9f32c03c484aaaae6ade5f86b4eb7/grandmotherAccount.json";
+  "https://gist.githubusercontent.com/himchan94/283d5837431bec8d5cb88a6e3525c35f/raw/12fda6b36c8dd6e29a9b878a236a363d4c85d561/grandmotherAccount.json";
 
 const getData = async () => {
   await fetch(myAccountUrl)

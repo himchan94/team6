@@ -5,18 +5,21 @@ const dayCont = (spendList) => {
   const _dayCont = document.createElement("ul");
   _dayCont.classList.add("day-cont");
 
-  _dayCont.addEventListener("scroll", (e) => {
-    scrollStatus = true;
-    dayContStatus = false;
+  // _dayCont.addEventListener("scroll", (e) => {
+  //   e.stopPropagation();
+  //   scrollStatus = true;
+  //   dayContStatus = false;
+  // });
+
+  _dayCont.addEventListener("touchmove", (e) => {
+    e.stopPropagation();
+    // dayContStatus = true;
   });
 
-  _dayCont.addEventListener("touchmove", () => {
-    dayContStatus = true;
-  });
-
-  _dayCont.addEventListener("touchend", () => {
-    scrollStatus = false;
-    dayContStatus = false;
+  _dayCont.addEventListener("touchend", (e) => {
+    e.stopPropagation();
+    // scrollStatus = false;
+    // dayContStatus = false;
   });
 
   spendList.forEach((list) => {

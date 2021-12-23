@@ -3,10 +3,16 @@ const accountSection = (
   accountMoney,
   limit,
   totalSpend,
-  progressColor,
-  today,
-  lastDayOfMonth
+  progressColor
 ) => {
+  const todayYMD = new Date();
+  const today = todayYMD.getDate();
+  const lastDayOfMonth = new Date(
+    todayYMD.getFullYear(),
+    todayYMD.getMonth() + 1,
+    0
+  ).getDate();
+
   return `<section class="account-section">
         <div class="account-cont">
           <strong class="account-num">${accountNumber}</strong>
