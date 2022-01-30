@@ -1,4 +1,4 @@
-# fsatcampus bank webapp toy project
+# fastcampus bank webapp toy project
 
 ## About this project
 
